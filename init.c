@@ -6,6 +6,45 @@
 #include <unistd.h>
 #include "mystride_types.h"
 
+void input_auto(Process* w) {
+    srand(time(NULL));
+	int total = MAX;
+	int weight = 10;
+    int randTotal[NUM];
+    int randAriv[NUM];
+    int selected[NUM];
+    int next;
+    randAriv[0] = 0;
+
+    for (int i=0; i<NUM; i++) {
+        if (i+1 == NUM) randTotal[i] = total;
+        else {
+            randTotal[i]= rand()%(total/2) + 1;
+            total -= randTotal[i];
+        }
+        selected[i] = 1;
+    }
+
+    for (int i=1; i<NUM; i++)
+        randAriv[i] = rand()%15;
+
+	for (int i=0; i<NUM; i++) {
+        while(1) {
+            next = rand()%NUM;
+            if(selected[next]) break;
+        }
+		w[i].name = 'A'+i;
+		w[i].arrival_time = randAriv[next];
+		w[i].service_time = randTotal[next];
+        selected[next]=0;
+    }
+    input_stride(w);
+}
+
+void input_stride(Process* w) {
+    for (int i=0; i<NUM; i++) w[i].stride = WEIGHT;
+}
+
 void input_data(Process* w) {
     w[0].name = 'A';
     w[0].arrival_time = 0;

@@ -9,8 +9,9 @@
 int main() {
     Process workload[NUM];
     int table[NUM][MAX];
-    input_data(workload);
+    input_auto(workload);
 
+    print_workload(workload);
     Stride(workload, table);
     myStride(workload, table);
 }

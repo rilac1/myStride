@@ -11,27 +11,26 @@ void Stride(Process w[], int t[NUM][MAX]) {
     int stride[NUM];
     int remain[NUM];
     int pass_val[NUM];
+    int arrive[NUM];
+    int next;
     for (int i=0; i<NUM; i++) {
-        pass_val[i] = 0;
+        pass_val[i] = 1e9;
+        arrive[i] = w[i].arrival_time;
         stride[i] = w[i].stride;
         remain[i] = w[i].service_time;
     }
+    pass_val[find_min(arrive)] = 0;
+    for(int run_time = 0; run_time < MAX; run_time++) {
+        for (int i=0; i<NUM; i++)
+            if (arrive[i] == run_time)
+                pass_val[i] = pass_val[find_min(pass_val)];
 
-    for(int i = 0; i < MAX; i++) {
-        int min_idx = 0;
-        int min_pass = 1e9; //가장 작은 pass val 을 구하기위한 임의의 숫자
-
-        /* 가장 작은 pass val을 가진 process의 i ndex 구하기*/
-        for (int j = 0; j < NUM; j++) {
-            if(pass_val[j] < min_pass && remain[j]>0) {
-                min_pass = pass_val[j];
-                min_idx = j;
-            }
-        }
-        if (min_pass == 1e9) break;
-        t[min_idx][i] = 1;
-        remain[min_idx]--;
-        pass_val[min_idx] += stride[min_idx];   
+        next = find_min(pass_val);
+        t[next][run_time] = 1;
+        remain[next]--;
+        if (remain[next]==0)
+            pass_val[next] = 1e9;
+        pass_val[next] += stride[next];   
     }
 
     printf("\t 【Stride】\n");
