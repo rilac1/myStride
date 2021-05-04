@@ -35,7 +35,7 @@ int Stride(Process w[], int t[NUM][MAX]) {
         remain[next]--;
         if (remain[next]==0) {
             pass_val[next] = 1e8;
-            w[next].end_time = run_time - w[next].arrival_time + contextS/10;;
+            w[next].end_time = run_time - w[next].arrival_time + contextS/10;
         }
         pass_val[next] += stride[next];   
     }
