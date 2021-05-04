@@ -50,7 +50,7 @@ void myStride(Process w[], int t[NUM][MAX] ) {
         stride[i] = w[i].stride;
         remain[i] = w[i].service_time;
         arrive[i] = w[i].arrival_time;
-        pass_val[i] = 1e7;
+        pass_val[i] = 1e8;
     }
     pass_val[find_min(arrive)] = WEIGHT;
 
@@ -72,7 +72,7 @@ void myStride(Process w[], int t[NUM][MAX] ) {
 
             if(remain[next] == 0) {
                 running = -1;
-		        pass_val[next] = 1e9;
+		        pass_val[next] = 1e8;
             }
             else if (running == quantum) {
                 stride[next] += (running * WEIGHT);
@@ -86,7 +86,7 @@ void myStride(Process w[], int t[NUM][MAX] ) {
 }
 
 int find_min(int* arr) {
-    int min = 1e7;
+    int min = 1e8;
     int ret;
     for (int i=0; i<NUM; i++) {
         if (arr[i]<min) {

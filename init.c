@@ -19,14 +19,14 @@ void input_auto(Process* w) {
     for (int i=0; i<NUM; i++) {
         if (i+1 == NUM) randTotal[i] = total;
         else {
-            randTotal[i]= rand()%(total/2) + 1;
+            randTotal[i]= rand()%(total/2) + rand()%(total/5) + 1;
             total -= randTotal[i];
         }
         selected[i] = 1;
     }
 
     for (int i=1; i<NUM; i++)
-        randAriv[i] = rand()%15;
+        randAriv[i] = rand()%(MAX/4);
 
 	for (int i=0; i<NUM; i++) {
         while(1) {
