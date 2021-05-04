@@ -12,14 +12,14 @@ void input_auto(Process* w) {
 	int weight = 10;
     int randTotal[NUM];
     int randAriv[NUM];
-    int selected[NUM];
+    int selected[NUM] = {0,};
     int next;
     randAriv[0] = 0;
 
-    for (int i=0; i<NUM; i++) {
+   for (int i=0; i<NUM; i++) {
         if (i+1 == NUM) randTotal[i] = total;
         else {
-            randTotal[i]= rand()%(total/2) + rand()%(total/5) + 1;
+            randTotal[i]= rand()%(total/3+1) + rand()%(total/NUM+1) + 1;
             total -= randTotal[i];
         }
         selected[i] = 1;
@@ -41,7 +41,13 @@ void input_auto(Process* w) {
 }
 
 void input_stride(Process* w) {
-    for (int i=0; i<NUM; i++) w[i].stride = WEIGHT;
+    srand(time(NULL));
+    for (int i=0; i<NUM; i++)
+        w[i].stride = rand()%9 + 1;
+}
+
+void auto_stride(Process* w) {
+
 }
 
 void input_data(Process* w) {

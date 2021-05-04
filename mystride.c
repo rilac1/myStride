@@ -47,7 +47,7 @@ void myStride(Process w[], int t[NUM][MAX] ) {
     int running = -1;
 
     for (int i=0; i<NUM; i++) {
-        stride[i] = w[i].stride;
+        stride[i] = WEIGHT;
         remain[i] = w[i].service_time;
         arrive[i] = w[i].arrival_time;
         pass_val[i] = 1e8;

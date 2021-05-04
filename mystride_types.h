@@ -7,6 +7,10 @@ typedef struct {
     int arrival_time;
     int service_time;
     int stride;
+    
+    int contextS;
+    int end_time[NUM];
+    int reponse_time[NUM];
 } Process;
 
 void print_result(Process w[], int p[][MAX]);

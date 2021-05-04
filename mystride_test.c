@@ -7,13 +7,16 @@
 #include "mystride_types.h"
 
 int main() {
-    Process workload[NUM];
+    Process workload1[NUM];
+    Process workload2[NUM];
     int table[NUM][MAX];
-    input_auto(workload);
 
-    print_workload(workload);
-    input_stride(workload);
+    input_auto(workload1);
+    input_auto(workload2);
+
+    input_stride(workload1);
+    print_workload(workload1);
     
-    Stride(workload, table);
-    myStride(workload, table);
+    Stride(workload1, table);
+    myStride(workload2, table);
 }

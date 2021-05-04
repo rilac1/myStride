@@ -33,7 +33,7 @@ void print_result(Process w[], int p[][MAX]) {
 }
 
 void print_workload(Process w[]) {
-    printf("     Arrival   Service\n");
+    printf("     Arrival        Service       Stride\n");
     for (int i=0; i<NUM; i++)
-        printf("%c:    %d,         %d,\n", w[i].name, w[i].arrival_time, w[i].service_time);
+        printf("%c: %10d, %10d, %10d\n", w[i].name, w[i].arrival_time, w[i].service_time, w[i].stride);
 }
