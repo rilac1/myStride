@@ -6,13 +6,14 @@
 #include <unistd.h>
 #include "mystride_types.h"
 
-void Stride(Process w[], int t[NUM][MAX]) {
+int Stride(Process w[], int t[NUM][MAX]) {
     init_table(t);
     int stride[NUM];
     int remain[NUM];
     int pass_val[NUM];
     int arrive[NUM];
-    int next;
+    int next, temp;
+    int contextS = 0;
     for (int i=0; i<NUM; i++) {
         pass_val[i] = 1e9;
         arrive[i] = w[i].arrival_time;
@@ -24,27 +25,32 @@ void Stride(Process w[], int t[NUM][MAX]) {
         for (int i=0; i<NUM; i++)
             if (arrive[i] == run_time)
                 pass_val[i] = pass_val[find_min(pass_val)];
-
+        temp = next;
         next = find_min(pass_val);
+        if (temp != next)
+            contextS++;
+        if (remain[next] == w[next].service_time)
+            w[next].response_time = run_time;
         t[next][run_time] = 1;
         remain[next]--;
-        if (remain[next]==0)
-            pass_val[next] = 1e9;
+        if (remain[next]==0) {
+            pass_val[next] = 1e8;
+            w[next].end_time = run_time - w[next].arrival_time + contextS/10;;
+        }
         pass_val[next] += stride[next];   
     }
-
-    printf("\t 【Stride】\n");
-    print_result(w, t);
+    return contextS;
 }
 
-void myStride(Process w[], int t[NUM][MAX] ) {
+int myStride(Process w[], int t[NUM][MAX] ) {
     init_table(t);
     int stride[NUM];
     int remain[NUM];
     int pass_val[NUM];
     int arrive[NUM];
-    int next, quantum;
+    int next, quantum, temp;
     int running = -1;
+    int contextS = 0;
 
     for (int i=0; i<NUM; i++) {
         stride[i] = WEIGHT;
@@ -60,7 +66,12 @@ void myStride(Process w[], int t[NUM][MAX] ) {
                 pass_val[i] = pass_val[find_min(pass_val)] - WEIGHT;
 
         if (running<0) {
+            temp = next;
             next = find_min(pass_val);
+            if (temp != next)
+                contextS++;
+            if (remain[next] == w[next].service_time)
+                w[next].response_time = run_time;
             quantum = (stride[next] / WEIGHT);
             running = 0;
         }
@@ -73,6 +84,7 @@ void myStride(Process w[], int t[NUM][MAX] ) {
             if(remain[next] == 0) {
                 running = -1;
 		        pass_val[next] = 1e8;
+                w[next].end_time = run_time - w[next].arrival_time + contextS/10;
             }
             else if (running == quantum) {
                 stride[next] += (running * WEIGHT);
@@ -80,9 +92,7 @@ void myStride(Process w[], int t[NUM][MAX] ) {
             }
         }
     }
-
-    printf("\t 【My Stride】\n");
-    print_result(w, t);
+    return contextS;
 }
 
 int find_min(int* arr) {

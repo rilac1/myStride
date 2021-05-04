@@ -17,16 +17,17 @@ void input_auto(Process* w) {
     randAriv[0] = 0;
 
    for (int i=0; i<NUM; i++) {
-        if (i+1 == NUM) randTotal[i] = total;
+        if (i+1 == NUM) {
+            randTotal[i] = total;
+            randAriv[i] = 0;
+        }
         else {
             randTotal[i]= rand()%(total/3+1) + rand()%(total/NUM+1) + 1;
             total -= randTotal[i];
+            randAriv[i] = rand()%(MAX/4);
         }
         selected[i] = 1;
     }
-
-    for (int i=1; i<NUM; i++)
-        randAriv[i] = rand()%(MAX/4);
 
 	for (int i=0; i<NUM; i++) {
         while(1) {
@@ -36,7 +37,20 @@ void input_auto(Process* w) {
 		w[i].name = 'A'+i;
 		w[i].arrival_time = randAriv[next];
 		w[i].service_time = randTotal[next];
+        w[i].end_time = 0;
+        w[i].response_time = 0;
         selected[next]=0;
+    }
+}
+
+void copy_workload(Process* w2, Process* w1) {
+    Process temp[NUM];
+    for (int i=0; i<NUM; i++) {
+        w1[i].name = w2[i].name;
+        w1[i].arrival_time = w2[i].arrival_time;
+        w1[i].service_time = w2[i].service_time;
+        w1[i].end_time = w2[i].end_time;
+        w1[i].response_time = w2[i].response_time;
     }
 }
 
@@ -44,37 +58,6 @@ void input_stride(Process* w) {
     srand(time(NULL));
     for (int i=0; i<NUM; i++)
         w[i].stride = rand()%9 + 1;
-}
-
-void auto_stride(Process* w) {
-
-}
-
-void input_data(Process* w) {
-    w[0].name = 'A';
-    w[0].arrival_time = 0;
-    w[0].service_time = 3;
-    w[0].stride = 100;
-
-    w[1].name = 'B';
-    w[1].arrival_time = 2;
-    w[1].service_time = 6;
-    w[1].stride = 100;
-
-    w[2].name = 'C';
-    w[2].arrival_time = 4;
-    w[2].service_time = 4;
-    w[2].stride = 100;
-
-    w[3].name = 'D';
-    w[3].arrival_time = 6;
-    w[3].service_time = 5;
-    w[3].stride = 100;
-
-    w[4].name = 'E';
-    w[4].arrival_time = 8;
-    w[4].service_time = 2;
-    w[4].stride = 100;
 }
 
 void init_table(int t[NUM][MAX]) {

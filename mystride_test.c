@@ -10,13 +10,24 @@ int main() {
     Process workload1[NUM];
     Process workload2[NUM];
     int table[NUM][MAX];
+    int a, b;
 
     input_auto(workload1);
-    input_auto(workload2);
-
+    copy_workload(workload1, workload2);
     input_stride(workload1);
+
     print_workload(workload1);
     
-    Stride(workload1, table);
-    myStride(workload2, table);
+    a = Stride(workload1, table);
+    if (MAX<=45) {
+        printf("\t 【Stride】\n");
+        print_result(workload1, table);
+    }
+    b = myStride(workload2, table);
+    if (MAX<=45) {
+        printf("\t 【myStride】\n");
+        print_result(workload2, table);
+    }
+
+    print_data(workload1, workload2, a, b);
 }
