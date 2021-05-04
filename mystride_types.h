@@ -1,5 +1,5 @@
-#define MAX 30 // Max time
-#define NUM 5
+#define MAX 1000 // Max time
+#define NUM 10
 #define WEIGHT 100
 
 typedef struct {
