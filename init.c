@@ -38,7 +38,6 @@ void input_auto(Process* w) {
 		w[i].service_time = randTotal[next];
         selected[next]=0;
     }
-    input_stride(w);
 }
 
 void input_stride(Process* w) {

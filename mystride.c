@@ -50,9 +50,10 @@ void myStride(Process w[], int t[NUM][MAX] ) {
         stride[i] = w[i].stride;
         remain[i] = w[i].service_time;
         arrive[i] = w[i].arrival_time;
-        pass_val[i] = 1e9;
+        pass_val[i] = 1e7;
     }
     pass_val[find_min(arrive)] = WEIGHT;
+
     for(int run_time = 0; run_time < MAX; run_time++) {
         for (int i=0; i<NUM; i++)
             if (arrive[i] == run_time)
@@ -85,7 +86,7 @@ void myStride(Process w[], int t[NUM][MAX] ) {
 }
 
 int find_min(int* arr) {
-    int min = 1e9;
+    int min = 1e7;
     int ret;
     for (int i=0; i<NUM; i++) {
         if (arr[i]<min) {

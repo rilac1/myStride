@@ -12,6 +12,8 @@ int main() {
     input_auto(workload);
 
     print_workload(workload);
+    input_stride(workload);
+    
     Stride(workload, table);
     myStride(workload, table);
 }
