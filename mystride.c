@@ -30,7 +30,7 @@ int Stride(Process w[], int t[NUM][MAX]) {
         if (temp != next)
             contextS++;
         if (remain[next] == w[next].service_time)
-            w[next].response_time = run_time;
+            w[next].response_time = run_time - w[next].arrival_time;
         t[next][run_time] = 1;
         remain[next]--;
         if (remain[next]==0) {
@@ -71,7 +71,7 @@ int myStride(Process w[], int t[NUM][MAX] ) {
             if (temp != next)
                 contextS++;
             if (remain[next] == w[next].service_time)
-                w[next].response_time = run_time;
+                w[next].response_time = run_time - w[next].arrival_time;
             quantum = (stride[next] / WEIGHT);
             running = 0;
         }

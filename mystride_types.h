@@ -1,7 +1,7 @@
-#define MAX 10000 // Max time
+#define MAX 100 // Max time
 #define NUM 10
 #define WEIGHT 100
-#define EXPERIMENT 1000
+#define EXPERIMENT 10000
 
 typedef struct {
     char name;
