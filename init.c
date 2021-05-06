@@ -4,6 +4,7 @@
 #include <time.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <math.h>
 #include "mystride_types.h"
 
 void input_auto(Process* w) {
@@ -27,6 +28,9 @@ void input_auto(Process* w) {
             randAriv[i] = rand()%(MAX/4);
         }
         selected[i] = 1;
+
+
+        w[i].ret_time = MAX / ((MAX/100)*(20/NUM)*(i+1));
     }
 
 	for (int i=0; i<NUM; i++) {
@@ -39,6 +43,7 @@ void input_auto(Process* w) {
 		w[i].service_time = randTotal[next];
         w[i].end_time = 0;
         w[i].response_time = 0;
+
         selected[next]=0;
     }
 }
@@ -51,6 +56,7 @@ void copy_workload(Process* w2, Process* w1) {
         w1[i].service_time = w2[i].service_time;
         w1[i].end_time = w2[i].end_time;
         w1[i].response_time = w2[i].response_time;
+        w1[i].ret_time = w2[i].ret_time;
     }
 }
 
@@ -66,3 +72,16 @@ void init_table(int t[NUM][MAX]) {
             t[i][j]=0;
 }
 
+void input_my(Process* w) {
+    w[0].name = 'C';
+	w[0].arrival_time = 0;
+	w[0].service_time = MAX*0.9;
+    w[0].end_time = 0;
+    w[0].response_time = 0;
+
+    w[1].name = 'I';
+	w[1].arrival_time = 0;
+	w[1].service_time = MAX*0.1;
+    w[1].end_time = 0;
+    w[1].response_time = 0;
+}

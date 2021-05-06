@@ -79,13 +79,16 @@ int myStride(Process w[], int t[NUM][MAX] ) {
             t[next][run_time] = 1;
             running++;
             remain[next]--;
-            pass_val[next] += (running*WEIGHT);
+            pass_val[next] += WEIGHT;
 
             if(remain[next] == 0) {
                 running = -1;
 		        pass_val[next] = 1e8;
                 w[next].end_time = run_time - w[next].arrival_time + contextS/10;
             }
+
+            else if(running == w[next].ret_time) running = -1; 
+
             else if (running == quantum) {
                 stride[next] += (running * WEIGHT);
                 running = -1;

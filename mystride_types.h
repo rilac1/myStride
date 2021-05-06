@@ -1,5 +1,5 @@
-#define MAX 100 // Max time
-#define NUM 10
+#define MAX 1000 // Max time
+#define NUM 2
 #define WEIGHT 100
 #define EXPERIMENT 10000
 
@@ -7,6 +7,7 @@ typedef struct {
     char name;
     int arrival_time;
     int service_time;
+    int ret_time;
     
     int end_time;
     int response_time;
@@ -22,6 +23,7 @@ void copy_workload(Process* w1, Process* w2);
 void input_data(Process* w);
 void input_auto(Process* w);
 void input_stride(Process* w);
+void input_my(Process* w);
 
 int Stride(Process *p, int t[NUM][MAX]);
 int myStride(Process *p, int t[NUM][MAX]);
