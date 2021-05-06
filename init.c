@@ -78,10 +78,12 @@ void input_my(Process* w) {
 	w[0].service_time = MAX*0.9;
     w[0].end_time = 0;
     w[0].response_time = 0;
+    w[0].ret_time = MAX/10;
 
     w[1].name = 'I';
 	w[1].arrival_time = 0;
 	w[1].service_time = MAX*0.1;
     w[1].end_time = 0;
     w[1].response_time = 0;
+    w[1].ret_time = 1;
 }

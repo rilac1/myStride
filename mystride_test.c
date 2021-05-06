@@ -31,8 +31,21 @@ int main() {
     }
     */
     
+    /*
     int cs[2] = {0,};
     double result[4] = {0,}; // av_res1, av_res2, av_end1, av_end2
     experiment(cs, result);
     print_data(cs, result);
+    */
+   
+    Process workload[NUM];
+    int table[NUM][MAX];
+    int cs[2] = {0,};
+    input_my(workload);
+    input_stride(workload);
+    print_workload(workload);
+    cs[0] = Stride(workload, table);
+    cs[1] = myStride(workload, table);
+
+    printf("%d %d\n", cs[0],cs[1]);
 }
