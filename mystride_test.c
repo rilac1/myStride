@@ -7,7 +7,6 @@
 #include "mystride_types.h"
 
 int main() {
-    /*
     Process workload1[NUM];
     Process workload2[NUM];
     int table[NUM][MAX];
@@ -29,8 +28,9 @@ int main() {
         printf("\t 【myStride】\n");
         print_result(workload2, table);
     }
-    */
     
+
+    // Experiment Mode
     /*
     int cs[2] = {0,};
     double result[4] = {0,}; // av_res1, av_res2, av_end1, av_end2
@@ -38,6 +38,9 @@ int main() {
     print_data(cs, result);
     */
    
+
+   // Compare "CPU bound vs IO bound"
+   /*
     Process workload[NUM];
     int table[NUM][MAX];
     int cs[2] = {0,};
@@ -48,4 +51,5 @@ int main() {
     cs[1] = myStride(workload, table);
 
     printf("%d %d\n", cs[0],cs[1]);
+    */
 }

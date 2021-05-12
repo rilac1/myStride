@@ -30,7 +30,7 @@ void input_auto(Process* w) {
         selected[i] = 1;
 
 
-        w[i].ret_time = MAX / ((MAX/100)*(20/NUM)*(i+1));
+        w[i].ret_time = MAX / (((MAX/100)+1)*(20/NUM)*(i+1));
     }
 
 	for (int i=0; i<NUM; i++) {

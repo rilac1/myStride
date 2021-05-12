@@ -1,5 +1,5 @@
 #define MAX 1000 // Max time
-#define NUM 2
+#define NUM 5
 #define WEIGHT 100
 #define EXPERIMENT 10000
 
